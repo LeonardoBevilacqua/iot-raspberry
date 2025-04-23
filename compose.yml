@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    ports:
+      - "8080:8080"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    working_dir: /app/Backend/servidor
+    command: gunicorn -w 2 -b 0.0.0.0:8080 app:app
+
